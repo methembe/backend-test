@@ -32,6 +32,7 @@ export class TaskDialogComponent implements OnInit {
 
     this.form = fb.group({
       title: [this.task.title, Validators.required],
+      tags:[this.task.tags],
       description: [this.task.description, Validators.required],
       color: [this.task.color,Validators.required]
   });
@@ -55,8 +56,15 @@ export class TaskDialogComponent implements OnInit {
       this.dialogRef.close();
   } 
 
+  delete() {
+    this.taskService.deleteTask(this.task.id).subscribe();
+    this.dialogRef.close();
+    window.location.reload();
+  }
+
   private mapFormToTaskModel(): void {
     this.task.title = this.form.get('title').value;
+    this.task.tags = this.form.get('tags').value;
     this.task.description = this.form.get('description').value;
     this.task.color = this.form.get('color').value;
     this.task.status = 'TODO';

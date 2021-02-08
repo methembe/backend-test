@@ -12,6 +12,7 @@ import { KanbanDialogComponent } from '../kanban-dialog/kanban-dialog.component'
 export class HomeComponent implements OnInit {
 
   kanbanList: Kanban[];
+  kanban: Kanban;
 
   constructor(
     private kanbanService: KanbanService,
@@ -40,4 +41,14 @@ export class HomeComponent implements OnInit {
     )
   }
 
+  delete(kanbanId:number) {
+    this.kanbanService.deleteKanban(kanbanId).subscribe();
+    window.location.reload();
+  }
+
+  confirmDelete(name: number) {
+    if(confirm("Are you sure to delete "+name)) {
+      this.delete(name);
+    }
+  }
 }

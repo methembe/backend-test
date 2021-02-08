@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,11 +15,8 @@ import java.util.Objects;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name ="kanban")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id",
-        scope = Kanban.class)
+@Table(name = "kanban")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Kanban.class)
 public class Kanban {
 
     @Id
@@ -29,12 +27,13 @@ public class Kanban {
     @ApiModelProperty(position = 2)
     private String title;
 
-    @OneToMany(
-            cascade = {CascadeType.ALL},
-            fetch = FetchType.EAGER)
+    @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @JoinColumn(name = "kanban_id")
     @ApiModelProperty(position = 3)
     private List<Task> tasks;
+
+    @ApiModelProperty(position = 4)
+    private LocalDateTime createdDate;
 
     public void addTask(Task task) {
 

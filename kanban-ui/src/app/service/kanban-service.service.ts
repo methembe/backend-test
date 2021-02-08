@@ -42,6 +42,13 @@ export class KanbanService {
       options);
   }
 
+  deleteKanban(kanbanId: number): Observable<Kanban>{
+    let headers = new HttpHeaders({'Content-Type':'application/json'});
+    let options = {headers: headers};
+    return this.http.delete<Kanban>(
+      this.kanbanAppUrl + '/kanbans/' + kanbanId,options);
+  }
+
   private prepareTiTleJsonObject(title: string) {
     const object = {
       title: title

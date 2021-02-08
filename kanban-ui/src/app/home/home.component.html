@@ -8,9 +8,17 @@
   
   <div class="main-card">
     <mat-nav-list>
-      <a mat-list-item *ngFor="let kanban of kanbanList" routerLink="/kanbans/{{kanban.id}}"> 
-        <p class="kanban-title">{{kanban.title}}</p>
-      </a>
+<div class="row" *ngFor="let kanban of kanbanList">
+        <a mat-list-item  routerLink="/kanbans/{{kanban.id}}">
+          <div class="item-content">
+            <p class="kanban-title">{{kanban.title}}</p>
+            <p class="kanban-createdDate">{{kanban.createdDate | date:'mediumDate'}}</p>
+          </div> 
+                
+        </a>
+        
+        <button id="{{kanban.id}}" class="mat-raised-button" (click)="confirmDelete($event.target.id)">Delete</button>
+</div>      
     </mat-nav-list>
   </div>
 </div>

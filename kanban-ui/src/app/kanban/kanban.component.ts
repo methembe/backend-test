@@ -7,6 +7,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
 import { TaskService } from '../service/task.service';
+//import {DeleteConfirmDialogComponent} from '../shared/delete-confirm-dialog/delete-confirm-dialog.component';
 
 @Component({
   selector: 'app-kanban',
@@ -18,6 +19,7 @@ export class KanbanComponent implements OnInit {
   kanban: Kanban;
   todos: Task[] = [];
   inprogress: Task[] = [];
+  testing: Task[] = [];
   dones: Task[] = [];
 
   constructor(
@@ -71,6 +73,7 @@ export class KanbanComponent implements OnInit {
   private splitTasksByStatus(kanban: Kanban): void {
     this.todos = kanban.tasks.filter(t=>t.status==='TODO');
     this.inprogress = kanban.tasks.filter(t=>t.status==='INPROGRESS');
+    this.testing = kanban.tasks.filter(t=>t.status==='TESTING')
     this.dones = kanban.tasks.filter(t=>t.status==='DONE');
   }
   
@@ -90,10 +93,17 @@ export class KanbanComponent implements OnInit {
       task.status = 'TODO'
     } else if (containerId === 'inpro'){
       task.status = 'INPROGRESS'
+    } else if (containerId === 'testing'){
+      task.status = 'TESTING'
     } else {
       task.status = 'DONE'
     }
     this.taskService.updateTask(task).subscribe();
+  }
+
+  delete(kanbanId:number) {
+    this.kanbanService.deleteKanban(kanbanId).subscribe();
+    window.location.reload();
   }
 
   private openDialog(title: string, task: Task): void {
@@ -106,4 +116,37 @@ export class KanbanComponent implements OnInit {
     };
     this.dialog.open(TaskDialogComponent, dialogConfig)
   }
+
+  /**
+  openConfirmationDialog() {
+    const dialogRef = this.dialog.open(DeleteConfirmDialogComponent,{
+      data:{
+        message: 'Are you sure want to delete?',
+        buttonText: {
+          ok: 'Save',
+          cancel: 'No'
+        }
+      }
+    });
+    const snack = this.snackBar.open('Snack bar open before dialog');
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        snack.dismiss();
+        const a = document.createElement('a');
+        a.click();
+        a.remove();
+        snack.dismiss();
+        this.snackBar.open('Closing snack bar in a few seconds', 'Fechar', {
+          duration: 2000,
+        });
+      }
+    });
+  }
+  **/
+ confirmDelete(name: number) {
+  if(confirm("Are you sure to delete "+name)) {
+    this.delete(name);
+  }
+}
 }

@@ -20,32 +20,42 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public List<Task> getAllTasks() {
+        Iterable<Task> taskIterable = taskRepository.findAll();
+        List<Task> Tasks = new ArrayList();
+        taskIterable.forEach(Tasks::add);
+        return Tasks;
     }
 
     @Override
     @Transactional
     public Optional<Task> getTaskById(Long id) {
+        return taskRepository.findById(id);
     }
 
     @Override
     @Transactional
     public Optional<Task> getTaskByTitle(String title) {
+
+        return taskRepository.findByTitle(title);
     }
 
 
     @Override
     @Transactional
     public Task saveNewTask(TaskDTO taskDTO) {
+        return taskRepository.save(convertDTOToTask(taskDTO));
     }
 
     @Override
     @Transactional
     public Task updateTask(Task oldTask, TaskDTO newTaskDTO) {
+       return taskRepository.save(oldTask);
     }
 
     @Override
     @Transactional
     public void deleteTask(Task task) {
+        taskRepository.deleteById(task.getId());
     }
 
     private Task convertDTOToTask(TaskDTO taskDTO) {
@@ -54,6 +64,7 @@ public class TaskServiceImpl implements TaskService {
         task.setDescription(taskDTO.getDescription());
         task.setColor(taskDTO.getColor());
         task.setStatus(taskDTO.getStatus());
+        task.setTags(taskDTO.getTags());
         return task;
     }
 
@@ -72,6 +83,10 @@ public class TaskServiceImpl implements TaskService {
 
         if (Optional.ofNullable((taskDTO.getStatus())).isPresent()) {
             task.setStatus(taskDTO.getStatus());
+        }
+
+        if (Optional.ofNullable((taskDTO.getTags())).isPresent()) {
+            task.setTags(taskDTO.getTags());
         }
         return task;
     }

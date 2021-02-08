@@ -9,6 +9,7 @@
       <input matInput
               placeholder="Title"
              formControlName="title"
+             required
              class="task-title">
   </mat-form-field>
 
@@ -21,7 +22,18 @@
               BLUE</mat-option>
           <mat-option value="#ff7eb9">
               PINK</mat-option>
+          <mat-option value="#ff0000">
+            RED</mat-option>
+          <mat-option value="#008000">
+            GREEN</mat-option>  
       </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+           placeholder="Tags (comma delimited)"
+           formControlName="tags"
+           class="task-title">
   </mat-form-field>
 
   <mat-form-field>
@@ -34,4 +46,5 @@
 <mat-dialog-actions>
   <button class="mat-raised-button"(click)="close()">Close</button>
   <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+  <button class="mat-raised-button" (click)="delete()">Delete</button>
 </mat-dialog-actions>

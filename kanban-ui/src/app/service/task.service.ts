@@ -27,4 +27,11 @@ export class TaskService {
   getTaskById(id: string): Observable<Task> {
     return this.http.get<Task>(this.kanbanAppUrl + '/tasks/' + id);
   }
+
+  deleteTask(taskId: number): Observable<Task>{
+    let headers = new HttpHeaders({'Content-Type':'application/json'});
+    let options = {headers: headers};
+    return this.http.delete<Task>(
+      this.kanbanAppUrl + '/tasks/' + taskId,options);
+  }
 }

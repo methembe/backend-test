@@ -17,8 +17,8 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class KanbanServiceTest {
@@ -155,9 +155,19 @@ public class KanbanServiceTest {
 
     /**
      * Mock Delete Kanban
-     
-     * **/
 
+     * **/
+    public void MockDeleteKanban(){
+
+        //when
+        //Kanban kanban = kanbanService.getKanbanById(2L).get();
+        Kanban kanban = new Kanban();
+        when(kanbanService.getKanbanById((2L))).thenReturn(Optional.of(kanban));
+        kanbanService.deleteKanban(kanban);
+
+        //then
+        verify(kanbanService,times(1)).deleteKanban(kanban);
+    }
 
     private List<Kanban> createKanbanList(int kanbanCount) {
         List<Kanban> kanbans = new ArrayList<>();

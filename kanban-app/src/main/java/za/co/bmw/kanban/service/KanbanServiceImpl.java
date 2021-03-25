@@ -75,6 +75,7 @@ public class KanbanServiceImpl implements KanbanService {
     private Kanban convertDTOToKanban(KanbanDTO kanbanDTO) {
         Kanban kanban = new Kanban();
         kanban.setTitle(kanbanDTO.getTitle());
+        kanban.setCreatedDate(LocalDateTime.now());
         return kanban;
     }
 
@@ -84,6 +85,8 @@ public class KanbanServiceImpl implements KanbanService {
         task.setDescription(taskDTO.getDescription());
         task.setColor(taskDTO.getColor());
         task.setStatus(taskDTO.getStatus());
+        task.setTags(taskDTO.getTags());
+        task.setLocalDateTime(LocalDateTime.now());
         return task;
     }
 }

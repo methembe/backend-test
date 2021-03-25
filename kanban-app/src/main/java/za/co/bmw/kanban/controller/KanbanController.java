@@ -1,9 +1,6 @@
 package za.co.bmw.kanban.controller;
 
-import za.co.bmw.kanban.model.Kanban;
-import za.co.bmw.kanban.model.KanbanDTO;
-import za.co.bmw.kanban.model.Task;
-import za.co.bmw.kanban.model.TaskDTO;
+import za.co.bmw.kanban.model.*;
 import za.co.bmw.kanban.service.KanbanService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -135,6 +132,8 @@ public class KanbanController {
     @ApiOperation(value="Save new Task and assign it to Kanban board", response = Kanban.class)
     public ResponseEntity<?> createTaskAssignedToKanban(@PathVariable Long kanbanId, @RequestBody TaskDTO taskDTO){
         try {
+            taskDTO.setStatus(TaskStatus.TODO);
+            taskDTO.setKanban_id(kanbanId);
             return new ResponseEntity<>(
                     kanbanService.addNewTaskToKanban(kanbanId, taskDTO),
                     HttpStatus.CREATED);

@@ -34,15 +34,19 @@ public class Task {
     @ApiModelProperty(position = 4)
     private String color;
 
-    @Enumerated(EnumType.STRING)
     @ApiModelProperty(position = 5)
+    private Long kanban_id;
+
+    @Enumerated(EnumType.STRING)
+    @ApiModelProperty(position = 6)
     private TaskStatus status;
 
-    @ApiModelProperty(position = 6)
+    @ApiModelProperty(position = 7)
     private String tags;
 
-    // Add property for Created Date
-    @Column(name = "local_date_time", columnDefinition = "TIMESTAMP")
-    @ApiModelProperty(position = 5)
+    @ApiModelProperty(position = 8)
     private LocalDateTime localDateTime;
+
+
+
 }

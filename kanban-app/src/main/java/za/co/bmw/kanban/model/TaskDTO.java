@@ -32,4 +32,8 @@ public class TaskDTO {
 
     @ApiModelProperty(position=5)
     private String tags;
+
+    @ApiModelProperty(position=6)
+    private Long kanban_id;
+
 }

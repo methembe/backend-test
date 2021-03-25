@@ -5,5 +5,6 @@ export class Task {
     description: String;
     color: String;
     status: String;
-    tags: string[];
+    tags: String;
+    kanban_id:number;
 }

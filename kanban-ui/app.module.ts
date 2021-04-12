@@ -15,8 +15,8 @@ import { HomeComponent } from './home/home.component';
 import { KanbanComponent } from './kanban/kanban.component';
 import { TaskDialogComponent } from './task-dialog/task-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { KanbanDialogComponent } from './kanban-dialog/kanban-dialog.component'; 
-import {  ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { KanbanDialogComponent } from './kanban-dialog/kanban-dialog.component';
+// import {  ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -29,7 +29,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     KanbanComponent,
     TaskDialogComponent,
     KanbanDialogComponent,
-     ConfirmDialogComponent
+     // ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +53,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [TaskDialogComponent, KanbanDialogComponent, ConfirmDialogComponent]
+  entryComponents: [TaskDialogComponent, KanbanDialogComponent]
 })
 export class AppModule { }
